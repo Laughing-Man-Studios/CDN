@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=16.17.0
+ARG NODE_VERSION=18.16.0
 FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="NodeJS"
@@ -23,6 +23,7 @@ RUN apt-get update -qq && \
 # Install node modules
 COPY --link package.json package-lock.json .
 RUN npm install
+RUN npm install -g npm@9.6.6
 
 # Copy application code
 COPY --link . .
