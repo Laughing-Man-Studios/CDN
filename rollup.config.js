@@ -1,7 +1,7 @@
 export default {
-    input: 'src/main.js',
+    input: 'demo/main.js',
     output: {
-        file: 'bundle.js',
+        file: 'dist/demo.min.js',
         format: 'cjs'
     }
 }

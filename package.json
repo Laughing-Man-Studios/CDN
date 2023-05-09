@@ -1,12 +1,13 @@
 {
   "name": "cdn",
   "version": "1.0.0",
+  "type": "module",
   "description": "A content distribution network for Laughing Man Studios",
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
     "build": "rollup --config",
-    "start": "node index.mjs"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
