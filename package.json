@@ -7,8 +7,7 @@
   "scripts": {
     "test": "npm run test",
     "build": "rollup --config",
-    "start": "node index.js",
-    "build:lit-graph": "rollup --config node:lit-graph"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
