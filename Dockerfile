@@ -18,7 +18,15 @@ FROM base as build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install -y python-is-python3 pkg-config build-essential 
+    apt-get install -y python-is-python3 pkg-config build-essential
+
+# Mount GitHub Password Secret
+RUN --mount=type=secret,id=GH_LOGIN_PASSW \
+    GH_LOGIN_PASSW="$(cat /run/secrets/GH_LOGIN_PASSW)"
+
+# Login to GitHub Packages registry
+
+
 
 # Install node modules
 COPY --link package.json package-lock.json .
