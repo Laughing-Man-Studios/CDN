@@ -22,11 +22,7 @@ RUN apt-get update -qq && \
 
 # Mount GitHub Password Secret
 RUN --mount=type=secret,id=GH_LOGIN_PASSW \
-    GH_LOGIN_PASSW="$(cat /run/secrets/GH_LOGIN_PASSW)"
-
-# Login to GitHub Packages registry
-
-
+    export GH_LOGIN_PASSW="$(cat /run/secrets/GH_LOGIN_PASSW)"
 
 # Install node modules
 COPY --link package.json package-lock.json .
