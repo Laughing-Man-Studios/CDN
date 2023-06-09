@@ -20,26 +20,20 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install -y python-is-python3 pkg-config build-essential
 
-# Mount GitHub Password Secret
-RUN --mount=type=secret,id=GH_LOGIN_PASSW \
-    GH_LOGIN_PASSW="$(cat /run/secrets/GH_LOGIN_PASSW)"
-
-# Login to GitHub Packages registry
-
-
+# Mount .npmrc file with Auth Key
+RUN --mount=type=secret,id=NPM_RC \
+   cat /run/secrets/NPM_RC > .npmrc
 
 # Install node modules
 COPY --link package.json package-lock.json .
-RUN npm install
 RUN npm install -g npm@9.6.6
+RUN npm install
 
 # Copy application code
 COPY --link . .
 
 # Build application
 RUN npm run build
-
-
 
 # Final stage for app image
 FROM base
