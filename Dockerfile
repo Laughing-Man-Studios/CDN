@@ -18,20 +18,22 @@ FROM base as build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install -y python-is-python3 pkg-config build-essential 
+    apt-get install -y python-is-python3 pkg-config build-essential
+
+# Mount .npmrc file with Auth Key
+RUN --mount=type=secret,id=NPM_RC \
+   cat /run/secrets/NPM_RC > .npmrc
 
 # Install node modules
 COPY --link package.json package-lock.json .
-RUN npm install
 RUN npm install -g npm@9.6.6
+RUN npm install
 
 # Copy application code
 COPY --link . .
 
 # Build application
 RUN npm run build
-
-
 
 # Final stage for app image
 FROM base

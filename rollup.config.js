@@ -8,7 +8,7 @@ export default [{
     plugins: [nodeResolve()]
 },
 {
-    input: 'node_modules/lit-graph/lit-graph.js',
+    input: 'node_modules/@laughing-man-studios/lit-graph/lit-graph.js',
     output: {
         file: 'dist/lit-graph.min.js',
     },
