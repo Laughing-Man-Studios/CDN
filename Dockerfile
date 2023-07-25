@@ -26,7 +26,7 @@ RUN --mount=type=secret,id=NPM_RC \
 
 # Install node modules
 COPY --link package.json package-lock.json .
-RUN npm install -g npm@9.6.6
+RUN npm install -g npm@9.8.1
 RUN npm install
 
 # Copy application code
