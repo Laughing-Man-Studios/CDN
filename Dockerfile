@@ -22,11 +22,12 @@ RUN apt-get update -qq && \
 
 # Mount .npmrc file with Auth Key
 RUN --mount=type=secret,id=NPM_RC \
-   cat /run/secrets/NPM_RC > .npmrc
+   (printf "//npm.pkg.github.com/:_authToken=" \
+   && cat /run/secrets/NPM_RC) > .npmrc
 
 # Install node modules
 COPY --link package.json package-lock.json .
-RUN npm install -g npm@9.6.6
+RUN npm install -g npm@9.8.1
 RUN npm install
 
 # Copy application code
